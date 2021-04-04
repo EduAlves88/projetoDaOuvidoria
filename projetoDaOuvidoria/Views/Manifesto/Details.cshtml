@@ -1,0 +1,308 @@
+﻿@model projetoDaOuvidoria.Models.Manifesto
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Resposta Do Manifesto</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Manifesto</h4>
+        <hr />
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Protocolo)
+            @Html.HiddenFor(model => model.Nome)
+            @Html.HiddenFor(model => model.Email)
+            @Html.HiddenFor(model => model.Telefone)
+            @Html.HiddenFor(model => model.Celular)
+            @Html.HiddenFor(model => model.Perfil)
+            @Html.HiddenFor(model => model.Campus)
+            @Html.HiddenFor(model => model.Curso)
+            @Html.HiddenFor(model => model.TipoSolicitacao)
+            @Html.HiddenFor(model => model.Setor)
+            @Html.HiddenFor(model => model.Assunto)
+            @Html.HiddenFor(model => model.Manifestacao)
+            @Html.HiddenFor(model => model.DataCriacao)
+        </div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Telefone)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Celular)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Celular)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Perfil)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Perfil)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Campus)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Campus)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Curso)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Curso)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoSolicitacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TipoSolicitacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Setor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Setor)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Assunto)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Assunto)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Manifestacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Manifestacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DataCriacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.RespostaOuvidoria)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RespostaOuvidoria)
+            </dd>
+        </dl>
+        <br />
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RespostaOuvidoria, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.RespostaOuvidoria, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RespostaOuvidoria, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model ouvidoriaProva.Models.Manifesto
+    @{
+        ViewBag.Title = "Resposta ao Manifesto";
+    }
+    <h2>Detalhes do Manifesto</h2>
+    @using (Html.BeginForm("Details", "Manifesto", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h4>Manifesto</h4>
+        <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Telefone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Celular)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Celular)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Perfil)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Perfil)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Campus)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Campus)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Curso)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Curso)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TipoSolicitacao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TipoSolicitacao)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Setor)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Setor)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Assunto)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Assunto)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Manifestacao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Manifestacao)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataCriacao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DataCriacao)
+                </dd>
+            </dl>
+            <br />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Manifestacao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Manifestacao)
+            </div>
+        </div>
+
+        <br />
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RespostaOuvidoria, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.RespostaOuvidoria, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RespostaOuvidoria, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+        <p>
+            @Html.ActionLink("Enviar E-mail", "Responder", new { id = Model.Protocolo }) |
+            @Html.ActionLink("Voltar", "Index")
+        </p>
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+
+
+*@

@@ -1,0 +1,90 @@
+﻿@model PagedList.IPagedList<projetoDaOuvidoria.Models.Manifesto>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Manifestações</h2>
+@*botao de criar novo manifesto escrito a mao*@
+<p>
+    <span class="border border-success">
+        @Html.ActionLink("Criar novo", "Create")
+    </span>
+</p>
+
+
+
+@* caixa de pesquisa*@
+<div>
+    @using (Html.BeginForm("Index", "Manifesto", FormMethod.Get))
+    {
+        <p>
+            Busca: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        </p>
+    }
+</div>
+
+
+@*indice de ordenaçao*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Protocolo", "Index", new { sortOrder = ViewBag.protocolo, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.nome, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Assunto", "Index", new { sortOrder = ViewBag.assunto, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Setor", "Index", new { sortOrder = ViewBag.setor, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Data Criação", "Index", new { sortOrder = ViewBag.dataCriacao, currentFilter = ViewBag.CurrentFilter })
+        </th>
+
+        <th>Ações</th>
+    </tr>
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Protocolo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Assunto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Setor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+
+            @*Açoes dos Cadastros*@
+        <td>
+            @Html.ActionLink("E-mail", "Responder", new { id = item.Protocolo }, new { @class = "glyphon" }) |
+            @Html.ActionLink("Responder Manifesto", "Details", new { id = item.Protocolo }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Protocolo })
+        </td>
+        </tr>
+    }
+
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
