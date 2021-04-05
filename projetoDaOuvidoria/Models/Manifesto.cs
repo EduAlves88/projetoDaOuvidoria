@@ -45,7 +45,7 @@ namespace projetoDaOuvidoria.Models
         [Required(ErrorMessage = "Por favor insira seu manifesto")]
         public string Manifestacao { get; set; }
         [Required(ErrorMessage = "Data Inválida")]
-        public DateTime? DataCriacao { get; set; }
+        public DateTime DataCriacao { get; set; }
 
         public string RespostaOuvidoria { get; set; }
 

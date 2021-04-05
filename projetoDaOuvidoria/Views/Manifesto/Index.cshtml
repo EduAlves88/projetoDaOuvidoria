@@ -9,21 +9,20 @@
 <h2>Lista de Manifestações</h2>
 @*botao de criar novo manifesto escrito a mao*@
 <p>
-    <span class="border border-success">
-        @Html.ActionLink("Criar novo", "Create")
-    </span>
+    
 </p>
 
 
 
 @* caixa de pesquisa*@
-<div>
+<div>    
     @using (Html.BeginForm("Index", "Manifesto", FormMethod.Get))
     {
-        <p>
-            Busca: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Search" />
-        </p>
+    <p>
+        <div class="border border-success">
+            @Html.ActionLink("Criar novo", "Create")    |    Busca: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string) <input type="submit" value="Pesquisar" />
+        </div>
+    </p>
     }
 </div>
 
@@ -73,8 +72,8 @@
 
             @*Açoes dos Cadastros*@
         <td>
-            @Html.ActionLink("E-mail", "Responder", new { id = item.Protocolo }, new { @class = "glyphon" }) |
-            @Html.ActionLink("Responder Manifesto", "Details", new { id = item.Protocolo }) |
+            @Html.ActionLink("E-mail", "Responder", new { id = item.Protocolo }) |
+            @Html.ActionLink("Responder", "Details", new { id = item.Protocolo }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Protocolo })
         </td>
         </tr>

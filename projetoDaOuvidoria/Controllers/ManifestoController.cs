@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Web;
 using System.Web.Mvc;
 using projetoDaOuvidoria.Models;
 using PagedList;
@@ -15,6 +16,8 @@ namespace ouvidoriaProva.Controllers
     {
         //Contexto de conexão ao db
         private Contexto db = new Contexto();
+
+
         //Envio do Email
         [HttpPost]
         public ActionResult EnviaEmail()
@@ -33,7 +36,6 @@ namespace ouvidoriaProva.Controllers
         {
             try
             {
-
                 // Estancia da Classe de Mensagem
                 MailMessage _mailMessage = new MailMessage();
                 // Remetente
@@ -87,17 +89,20 @@ namespace ouvidoriaProva.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            //Barra de Busca
+            //Busca da Lista o que nao obteve resposta
             var manif = from s in db.Manifesto
+                        where s.RespostaOuvidoria.Equals(null)
                         select s;
+
             if (!String.IsNullOrEmpty(searchString))
             {
+                //Barra de Busca por nome assunto ou setor
                 manif = manif.Where(s => s.Nome.Contains(searchString)
                                        || s.Assunto.Contains(searchString)
                                         || s.Setor.Contains(searchString)
                                        );
             }
-            //Ordenação
+            //Ordenação por tipo de dado
             switch (sortOrder)
             {
                 case "nome":
@@ -138,13 +143,13 @@ namespace ouvidoriaProva.Controllers
         // POST: manifestos/Details/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Details([Bind(Include = "Protocolo,Nome,Email,Telefone,Celular,Perfil,Campus,Curso,TipoSolicitacao,Setor,Assunto,Manifestacao,DataCriacao,RespostaOuvidoria")] Manifesto manifesto)
+        public ActionResult Details([Bind(Include = "Protocolo,Nome,Email,Telefone,Celular,Perfil,Campus," +
+                                                    "Curso,TipoSolicitacao,Setor,Assunto,Manifestacao,DataCriacao," +
+                                                    "RespostaOuvidoria")] Manifesto manifesto)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(manifesto).State = EntityState.Modified;
-
-                //
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -153,6 +158,7 @@ namespace ouvidoriaProva.Controllers
         // GET: manifestos/Create
         public ActionResult Create()
         {
+
             //Listas Pré Definidas de Perfil, Campus e Solicitação
             var perfilList = new List<string>() { "Aluno", "Pais", "Professor", "Funcionário", "Visitante" };
             ViewBag.perfilList = perfilList;
@@ -169,6 +175,7 @@ namespace ouvidoriaProva.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 db.Manifesto.Add(manifesto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -226,6 +233,7 @@ namespace ouvidoriaProva.Controllers
         //Confirmação de Exclusão
         public ActionResult DeleteConfirmed(int id)
         {
+            
             Manifesto manifesto = db.Manifesto.Find(id);
             db.Manifesto.Remove(manifesto);
             db.SaveChanges();
@@ -282,8 +290,7 @@ public ActionResult Edit([Bind(Include = "Protocolo,Nome,Email,Telefone,Celular,
 }
 
 
-
-// GET: manifestos/Details/5
+//Gera apenas detalhes
   public ActionResult Details(int? id)
   {
       if (id == null)
